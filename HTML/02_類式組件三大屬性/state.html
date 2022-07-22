@@ -18,7 +18,6 @@
           super(props);
           this.state = { isHot: true };
 
-
           /**
            * 解析下方代碼：
            *    首先從左往右看起：this.demo.bind(this)
@@ -28,27 +27,31 @@
            *    然後再看this.demo
            *    this是該實例對象
            *    this.demo是指該實例對象的中新添加了demo的方法
-           * 
+           *
            * */
-          this.demo = this.demo.bind(this);
+        //this.demo = this.demo.bind(this);
         }
 
-        // demo = () => {
-        //   console.log(this.state.isHot);
-        //   this.state.isHot = !this.state.isHot;
-        //   console.log(this.state.isHot);
-        // };
+        //進階版
+        demo = () => {
+            const isHot = this.state.isHot;
+            //state是更新，一種合并
+            this.setState({isHot:!isHot});
+        };
 
-        demo(){
-            console.log(this.state.isHot);
-        }
+        //原始版
+        // demo() {
+        //   const isHot = this.state.isHot;
+        //   //狀態是特殊
+        //   this.setState({ isHot: !isHot });
+        // }
 
         render() {
           //解構賦值
           const { isHot } = this.state;
           return (
             <h1 onClick={this.demo}>
-              今天天氣很{this.state ? "炎熱" : "涼爽"}
+              今天天氣很{this.state.isHot ? "炎熱" : "涼爽"}
             </h1>
           );
         }

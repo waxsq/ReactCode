@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="../../build/react.development.js"></script>
+    <script src="../../build/react-dom.development.js"></script>
+    <script src="../../build/babel.min.js"></script>
+    <script src="../../build/prop-types.js"></script>
+  </head>
+  <body>
+    <div id="test"></div>
+
+    <script type="text/babel">
+      class Weather extends React.Component {
+        render() {
+          //解構賦值
+          const { name, age } = this.props;
+          return (
+            <div>
+              <ul>
+                <li>{name}</li>
+                <li>{age}</li>
+              </ul>
+            </div>
+          );
+        }
+      }
+
+      //props是不能修改的
+
+      //props參數規則
+      Weather.propTypes = {
+        name: PropTypes.string.isRequired,
+        age: PropTypes.number,
+      };
+      //默認值
+      Weather.defaultProps = {
+        age: 20,
+      };
+
+      const p = { name: "qq", age: 12 };
+      ReactDOM.render(<Weather {...p} />, document.getElementById("test"));
+    </script>
+  </body>
+</html>
