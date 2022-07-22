@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="../../build/react.development.js"></script>
+    <script src="../../build/react-dom.development.js"></script>
+    <script src="../../build/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="test"></div>
+    <script type="text/babel">
+      class Demo extends React.Component {
+        show = () => {
+          const { inputClick } = this;
+          alert(inputClick.value);
+        };
+        showBlur = () => {
+          const { inputBlur } = this;
+          alert(inputBlur.value);
+        };
+
+        //同樣也是回調函數
+        saveInput = (c) => {
+          this.inputClick = c;
+        };
+
+        /**
+         * ref是標識標簽，可以獲取真實節點
+         * */
+        render() {
+          return (
+            //回調形式函數的ref
+            //jsx的注釋
+            // {/*xxxxx*/}
+            <div>
+              <input type="text" ref={this.saveInput} />
+              &nbsp;
+              <input type="button" value="提交" onClick={this.show} />
+              &nbsp;
+              <input
+                type="text"
+                ref={(c) => (this.inputBlur = c)}
+                onBlur={this.showBlur}
+              />
+            </div>
+          );
+        }
+      }
+
+      ReactDOM.render(<Demo />, document.getElementById("test"));
+    </script>
+  </body>
+</html>

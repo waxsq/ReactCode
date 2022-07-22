@@ -25,11 +25,6 @@
           age: 20,
         };
 
-        /**
-         * 如果不添加static就不能添加到類本身，而是實例對象上
-         *
-         * */
-
         render() {
           //解構賦值
           const { name, age } = this.props;
@@ -43,18 +38,6 @@
           );
         }
       }
-
-      //props是不能修改的
-
-      //props參數規則
-      //   Weather.propTypes = {
-      //     name: PropTypes.string.isRequired,
-      //     age: PropTypes.number,
-      //   };
-      //   //默認值
-      //   Weather.defaultProps = {
-      //     age: 20,
-      //   };
 
       const p = { name: "qq", age: 12 };
       ReactDOM.render(<Weather {...p} />, document.getElementById("test"));

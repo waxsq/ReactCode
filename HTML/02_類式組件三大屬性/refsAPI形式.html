@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="../../build/react.development.js"></script>
+    <script src="../../build/react-dom.development.js"></script>
+    <script src="../../build/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="test"></div>
+    <script type="text/babel">
+      class Demo extends React.Component {
+        //React.createRef調用之後可以返回一個容器，該容器可以存儲被ref所標識的節點
+        saveInput = React.createRef();
+
+        show = () => {
+          console.log(saveInput);
+        };
+
+        /**
+         * ref是標識標簽，可以獲取真實節點
+         * */
+        render() {
+          return (
+            <div>
+              <input type="text" ref={this.saveInput} />
+              &nbsp;
+              <input type="button" value="提交" onClick={this.show} />
+            </div>
+          );
+        }
+      }
+
+      ReactDOM.render(<Demo />, document.getElementById("test"));
+    </script>
+  </body>
+</html>
