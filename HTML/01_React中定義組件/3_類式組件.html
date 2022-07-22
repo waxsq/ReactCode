@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="../../build/react.development.js"></script>
+    <script src="../../build/react-dom.development.js"></script>
+    <script src="../../build/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="test"></div>
+
+    <script type="text/babel">
+      //創建類式組件
+      //類式組件繼承Component
+      class Demo extends React.Component{
+        /**
+         * render存放在原型對象上，供實例使用
+         * */
+        render(){
+            return <h2>類式組件</h2>
+        }
+      }
+      //渲染
+      //上下兩個render沒有任何關係
+
+      /**
+       * 執行ReactDOM.render(<Demo/>）
+       *    1、React解析組件標簽，找到了組件
+       *    2、發現組件是使用類定義的，隨後new出來該類實例，並通過實力調用到原型上的render方法
+       *    3、將render返回的虛擬dom轉爲真是dom
+       * */
+      ReactDOM.render(<Demo/>,document.getElementById('test'));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <script src="../build/react.development.js"></script>
+    <script src="../build/react-dom.development.js"></script>
+    <script src="../build/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="example"></div>
+    <script type="text/babel">
+      //模擬屬性
+      const data = ["1", "2", "3"];
+
+      /**
+       * 標簽要混入js表達式
+       *          注意區分：語句和表達式
+       *            1、表達式：一個表達式會產生一個值，可以放在任一個需要值得地方
+       *            2、語句：沒有返回值
+       * */
+      const vDom = (
+        <div>
+          <h1>List</h1>
+          <ul>
+            {
+              /**
+               * React元素遍歷的時候都需要唯一的key
+               * */
+              data.map((item, index) => {
+                return <li key={index}>{item}</li>;
+              })
+            }
+          </ul>
+        </div>
+      );
+
+      ReactDOM.render(vDom, document.getElementById("example"));
+    </script>
+  </body>
+</html>

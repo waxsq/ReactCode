@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="../../build/react.development.js"></script>
+    <script src="../../build/react-dom.development.js"></script>
+    <script src="../../build/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="test"></div>
+
+    <script type="text/babel">
+      class Weather extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = { isHot: true };
+
+
+          /**
+           * 解析下方代碼：
+           *    首先從左往右看起：this.demo.bind(this)
+           *    this是指Weather的實例對象(標簽中自動創建)，
+           *    this.demo在實例對象中沒有去原型對象中尋找
+           *    this.demo.bind(this)中，在原型對象中找到demo方法，返回一個新的函數并且能改變該函數的this
+           *    然後再看this.demo
+           *    this是該實例對象
+           *    this.demo是指該實例對象的中新添加了demo的方法
+           * 
+           * */
+          this.demo = this.demo.bind(this);
+        }
+
+        // demo = () => {
+        //   console.log(this.state.isHot);
+        //   this.state.isHot = !this.state.isHot;
+        //   console.log(this.state.isHot);
+        // };
+
+        demo(){
+            console.log(this.state.isHot);
+        }
+
+        render() {
+          //解構賦值
+          const { isHot } = this.state;
+          return (
+            <h1 onClick={this.demo}>
+              今天天氣很{this.state ? "炎熱" : "涼爽"}
+            </h1>
+          );
+        }
+      }
+
+      ReactDOM.render(<Weather />, document.getElementById("test"));
+    </script>
+  </body>
+</html>
