@@ -16,8 +16,12 @@
         //React.createRef調用之後可以返回一個容器，該容器可以存儲被ref所標識的節點
         saveInput = React.createRef();
 
+        //标准取出方式为
+        //saveInput:{current: input}
         show = () => {
-          console.log(saveInput);
+          //console.log(this.saveInput);
+          const inputValue = this.saveInput.current;
+          console.log(inputValue.value);
         };
 
         /**
