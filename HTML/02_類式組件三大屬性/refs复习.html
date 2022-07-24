@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="../../build/react.development.js"></script>
+    <script src="../../build/react-dom.development.js"></script>
+    <script src="../../build/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="test"></div>
+    <script type="text/babel">
+      class Demo extends React.Component {
+        getStrInput = () => {
+          let { Str } = this.refs;
+          alert(Str.value);
+        };
+
+        func = (value) => {
+           this.funcValue = value;
+        };
+
+        getFuncInput = (value) => {
+          alert(this.funcValue.value);
+        };
+
+        apiValue = React.createRef();
+
+        getApiInput = () => {
+          alert(this.apiValue.current.value);
+        };
+
+        render() {
+          return (
+            <div>
+              <input type="text" ref="Str" />
+              <button onClick={this.getStrInput}>点击字符串形式获取</button>
+              <br />
+              <input type="text" ref={this.func} />
+              <button onClick={this.getFuncInput}>点击回调函数方式获取</button>
+              <br />
+              <input type="text" ref={this.apiValue} />
+              <button onClick={this.getApiInput}>点击API方式获取</button>
+            </div>
+          );
+        }
+      }
+
+      ReactDOM.render(<Demo />, document.getElementById("test"));
+    </script>
+  </body>
+</html>

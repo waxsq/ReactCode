@@ -14,6 +14,7 @@
     <script type="text/babel">
       class Demo extends React.Component {
         //React.createRef調用之後可以返回一個容器，該容器可以存儲被ref所標識的節點
+        //该容器只能存储一个组件标识，不能存储多个，必须创建都多个createRef
         saveInput = React.createRef();
 
         //标准取出方式为
@@ -25,6 +26,7 @@
         };
 
         /**
+         * 
          * ref是標識標簽，可以獲取真實節點
          * */
         render() {

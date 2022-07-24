@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="../../build/react.development.js"></script>
+    <script src="../../build/react-dom.development.js"></script>
+    <script src="../../build/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="test"></div>
+    <script type="text/babel">
+      //非受控件
+
+      class MyComponent extends React.Component {
+        handleSubmit = (event) => {
+          event.preventDefault();//阻止表单提交
+          console.log(this.username.value + ":" + this.password.value);
+        };
+
+        render() {
+          return (
+            <div>
+              <form onSubmit={this.handleSubmit}>
+                账号：
+                <input
+                  type="text"
+                  ref={(c) => (this.username = c)}
+                  name="username"
+                />
+                密码：
+                <input
+                  type="password"
+                  ref={(c) => (this.password = c)}
+                  name="password"
+                />
+                <button>提交</button>
+              </form>
+            </div>
+          );
+        }
+      }
+
+      ReactDOM.render(<MyComponent />, document.getElementById("test"));
+    </script>
+  </body>
+</html>
