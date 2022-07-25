@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="../../build/react.development.js"></script>
+    <script src="../../build/react-dom.development.js"></script>
+    <script src="../../build/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="test"></div>
+
+    <script type="text/babel">
+      class Person extends React.Component {
+        //React生命周期
+        /**
+         * props ====>
+         * componentWillMount ====>
+         * render ====>
+         * componentDidMount
+         * */
+
+        //构造器
+        constructor(props) {
+          super(props);
+          console.log("constructor");
+          this.state = { count: 1 };
+        }
+        //将要挂载
+        componentWillMount() {
+          console.log("componentWillMount");
+        }
+
+        add = () => {
+          let { count } = this.state;
+          count++;
+          this.setState({ count });
+        };
+
+        //主动卸载组件1
+        unmount = () => {
+          console.log("unmountComponentAtNode");
+          ReactDOM.unmountComponentAtNode(document.getElementById("test"));
+        };
+
+        //组件将要卸载
+        componentWillUnmount() {
+          console.log("componentWillUnmount");
+        }
+
+        /**
+         * 数据更新(从state的变化开始)
+         * shouldComponentUpdate ===> render ===> componentDidUpdate
+         * */
+
+        shouldComponentUpdate() {
+          console.log("shouldComponentUpdate");
+          return true;
+        }
+
+        componentDidUpdate() {
+          console.log("componentDidMount");
+        }
+
+        render() {
+          console.log("render");
+          return (
+            <div>
+              <h2>当前数量{this.state.count}</h2>
+              <button onClick={this.add}>添加</button>
+              <button onClick={this.unmount}>卸载组件</button>
+            </div>
+          );
+        }
+
+        //挂载完毕
+        componentDidMount() {
+          console.log("componentDidMount");
+        }
+      }
+
+      ReactDOM.render(<Person />, document.getElementById("test"));
+    </script>
+  </body>
+</html>

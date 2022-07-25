@@ -1,12 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
-    
-</body>
+    <script src="../../build/react.development.js"></script>
+    <script src="../../build/react-dom.development.js"></script>
+    <script src="../../build/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="test"></div>
+    <script type="text/babel">
+      //非受控件
+
+      /**
+       * 高阶函数：（柯里化）
+       *    1、若a函数的接收参数是函数，那么该函数是高阶函数
+       *    2、若a的返回值是函数，则该函数也称高阶函数
+       * */
+
+      class MyComponent extends React.Component {
+        state = {
+          username: "",
+          password: "",
+        };
+        handleSubmit = (event) => {
+          event.preventDefault(); //阻止表单提交
+          console.log(this.state.username + ":" + this.state.password);
+        };
+
+        // getUsernameOnChange = (event) => {
+        //   this.setState({ username: event.target.value });
+        // };
+        // getPasswordOnChange = (event) => {
+        //   this.setState({ password: event.target.value });
+        // };
+
+        //优化
+        setFormData = (dataType) => {
+          /**
+           * 这里返回一个函数，因为在下方onChange={this.setFormData('password')}
+           * 中，如果不返回一个方法，则React自动帮你执行，并且直接返回数值，
+           * 如 onChange 永远代表一个值而不是方法
+           * 每一个事件都有自己的event对象
+           * */
+          return (event) => {
+            this.setState({ [dataType]: event.target.value });
+          };
+        };
+
+        render() {
+          return (
+            <div>
+              <form onSubmit={this.handleSubmit}>
+                账号：
+                <input
+                  type="text"
+                  onChange={this.setFormData("username")}
+                  name="username"
+                />
+                密码：
+                <input
+                  type="password"
+                  onChange={this.setFormData("password")}
+                  name="password"
+                />
+                <button>提交</button>
+              </form>
+            </div>
+          );
+        }
+      }
+
+      ReactDOM.render(<MyComponent />, document.getElementById("test"));
+
+
+
+      /**
+       * 柯里化小例子
+       * */
+
+       let sum = (a)=>{
+        return (b)=>{
+            return (c)=>{
+                return a+b+c;
+            }
+        }
+       }
+
+       console.log(sum(1)(2)(3));
+    </script>
+  </body>
 </html>
