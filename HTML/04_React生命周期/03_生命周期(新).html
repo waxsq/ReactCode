@@ -5,9 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <script src="../../build/react.development.js"></script>
-    <script src="../../build/react-dom.development.js"></script>
-    <script src="../../build/babel.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/babel-core/6.1.19/browser.js"></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@16/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+    ></script>
   </head>
   <body>
     <div id="test"></div>
@@ -29,9 +35,9 @@
           this.state = { count: 1 };
         }
         //将要挂载
-        componentWillMount() {
-          console.log("componentWillMount");
-        }
+        // componentWillMount() {
+        //   console.log("componentWillMount");
+        // }
 
         add = () => {
           let { count } = this.state;
@@ -65,9 +71,9 @@
         }
 
         //数据将要更新(从forceUpdate开始)
-        componentWillUpdate() {
-          console.log("componentWillUpdate");
-        }
+        // componentWillUpdate() {
+        //   console.log("componentWillUpdate");
+        // }
 
         componentDidUpdate() {
           console.log("componentDidMount");
@@ -90,43 +96,7 @@
           console.log("componentDidMount");
         }
       }
-
-      // 父组件传参给子组件
-      class A extends React.Component {
-        state = { name: "L" };
-
-        changeName = () => {
-          this.setState({ name: "V" });
-        };
-
-        render() {
-          return (
-            <div>
-              <h2>this is A Component</h2>
-              <button onClick={this.changeName}>点击切换状态</button>
-              <B name={this.state.name} />
-            </div>
-          );
-        }
-      }
-      class B extends React.Component {
-        //父组件传参给子组件，将要接收新的值
-        //该方法第一次不起作用，只有第二次才生效（数值变化）
-        componentWillReceiveProps() {
-          console.log("componentWillReceiveProps");
-        }
-
-        render() {
-          let { name } = this.props;
-          return (
-            <div>
-              <h2>this is B Component</h2>
-              <p>{name}</p>
-            </div>
-          );
-        }
-      }
-      ReactDOM.render(<A />, document.getElementById("test"));
+      ReactDOM.render(<Person />, document.getElementById("test"));
     </script>
   </body>
 </html>
