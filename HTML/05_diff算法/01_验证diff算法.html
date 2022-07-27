@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="../../build/react.development.js"></script>
+    <script src="../../build/react-dom.development.js"></script>
+    <script src="../../build/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="test"></div>
+
+    <script type="text/babel">
+      class Time extends React.Component {
+        state = { data: new Date() };
+
+        componentDidMount() {
+          setInterval(() => {
+            this.setState({ data: new Date() });
+          }, 1000);
+        }
+
+        /**
+         * 通过diffing算法，比较前后两次的变化（标签）
+         * 发现需要变化的DOM则变化，其他维持不变
+         * */
+        render() {
+          return (
+            <div>
+              <h2>hello</h2>
+              <input type="text" />
+
+              <br />
+              <span>now time is {this.state.data.toTimeString()}</span>
+            </div>
+          );
+        }
+      }
+
+      ReactDOM.render(<Time />, document.getElementById("test"));
+    </script>
+  </body>
+</html>
