@@ -1,7 +1,8 @@
 //引入核心库
 import React, { Component } from "react";
 //引入子组件
-
+import Hello from "./Component/HelloComponent/Hello";
+import Welcome from "./Component/WelcomeComponent/Welcome";
 
 /**
  * 上面不是解构赋值
@@ -23,7 +24,8 @@ export default class App extends Component {
   render() {
     return (
       <div>
-
+        <Hello />
+        <Welcome />
       </div>
     );
   }
