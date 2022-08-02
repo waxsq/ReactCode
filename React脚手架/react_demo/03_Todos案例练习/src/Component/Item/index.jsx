@@ -32,6 +32,9 @@ export default class Item extends Component {
         }
     }
 
+
+    
+
     render() {
         let { data } = this.props;
         const { mouse } = this.state;
