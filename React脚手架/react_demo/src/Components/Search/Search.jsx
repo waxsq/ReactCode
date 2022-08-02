@@ -8,39 +8,53 @@ export default class Search extends Component {
   //https://api.github.com/search/users?q=xxxxxx
 
   Search = () => {
-    //单次解构赋值
-    //let { value } = this.SearchNode;
-
-    //连续解构赋值
-    //let { SearchNode: { value } } = this;
-    //在上式中SearchNode并没有定义
-
-    //连续解构赋值并重命名
-    // let { SearchNode: { value: searchValue } } = this;
-    // console.log(searchValue);
 
     //单次解构赋值并重命名
     let { value: search } = this.SearchNode;
 
-    // //更新状态
-    // //this.props.updateAppState({ isFirst: false, isLoading: true });
+
 
     PubSub.publish('news', { isFirst: false, isLoading: true })
-    
-    http.get(`/api1/search/users?q=${search}`).then(
+
+
+    //#region
+    // http.get(`/api1/search/users?q=${search}`).then(
+    //   response => {
+    //     //发布消息
+    //     PubSub.publish('news', { users: response.data.items, isLoading: false, error: '' })
+    //     //this.props.updateAppState({ users: response.data.items, isLoading: false, error: '' });
+    //   },
+    //   error => {
+
+    //     PubSub.publish('news', { isLoading: false, error: error.message })
+    //     //this.props.updateAppState({ isLoading: false, error: error.message });
+
+    //   }
+    // )
+    //#endregion
+
+
+    //发送网络请求 ---- fetch
+
+    fetch(`/api1/search/users2?q=${search}`).then(
       response => {
-        //发布消息
-        PubSub.publish('news', { users: response.data.items, isLoading: false, error: '' })
-        //this.props.updateAppState({ users: response.data.items, isLoading: false, error: '' });
+        console.log('联系上服务器');
+        return response.json();
       },
-      error => {
-
-        PubSub.publish('news', { isLoading: false, error: error.message })
-        //this.props.updateAppState({ isLoading: false, error: error.message });
-
-      }
-    )
-
+      // error => {
+      //   console.log('联系失败');
+      //   return Promise.reject();
+      // }
+    ).then(
+      response => {
+        console.log('成功获取到', response);
+      },
+      // error => {
+      //   console.log('失败获取', error);
+      // }
+    ).catch{
+      
+    }
   }
 
 
