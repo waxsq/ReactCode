@@ -28,7 +28,7 @@ class List extends Component {
         return (
             <div className="row">
                 {
-                    isFirst == true ? <h2>请输入...</h2> :
+                    isFirst ? <h2>请输入...</h2> :
                         isLoading ? <h2>Loading...</h2> :
                             error ? <h2>{error}</h2> :
                                 users.map(user => {

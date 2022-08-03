@@ -7,7 +7,7 @@ export default class Search extends Component {
 
   //https://api.github.com/search/users?q=xxxxxx
 
-  Search = () => {
+  Search = async () => {
 
     //单次解构赋值并重命名
     let { value: search } = this.SearchNode;
@@ -36,26 +36,34 @@ export default class Search extends Component {
 
     //发送网络请求 ---- fetch
 
-    fetch(`/api1/search/users2?q=${search}`).then(
-      response => {
-        console.log('联系上服务器');
-        return response.json();
-      },
-      // error => {
-      //   console.log('联系失败');
-      //   return Promise.reject();
-      // }
-    ).then(
-      response => {
-        console.log('成功获取到', response);
-      },
-      // error => {
-      //   console.log('失败获取', error);
-      // }
-    ).catch{
-      
+    // fetch(`/api1/search/users2?q=${search}`).then(
+    //   response => {
+    //     console.log('联系上服务器');
+    //     return response.json();
+    //   },
+    //   // error => {
+    //   //   console.log('联系失败');
+    //   //   return Promise.reject();
+    //   // }
+    // ).then(
+    //   response => {
+    //     console.log('成功获取到', response);
+    //   },
+
+    // ).catch(
+    //   error => console.log(error)
+    // )
+
+// 优化代码
+    try {
+      const result = await fetch(`/api1/search/users?q=${search}`);
+      const data = await result.json();
+      PubSub.publish('news', { users: data.items, isLoading: false, error: '' })
+    } catch (error) {
+      PubSub.publish('news', { isLoading: false, error: error.message , users:[]})
     }
   }
+  
 
 
   render() {

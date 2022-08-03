@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
+import Test from "./pages/Test/Test";
 import Home from "./pages/Home/Home";
 import About from "./pages/About/About";
 import Header from "./Component/Header/Header";
@@ -21,12 +22,15 @@ export default class App extends Component {
           <div className="col-xs-6">
             <div className="panel">
               <div className="panel-body">
-                {/* 注册路由 */}
                 <Switch>
                   <Route path="/about" component={About} />
                   <Route path="/home" component={Home} />
-                  {/* 重定向，默认指向(如果都匹配不上) */}
-                  <Redirect to='/home'></Redirect>
+                  {/* 
+                  当path为/home的时候没虽然已经匹配到了
+                  ，但是不会立刻跳转，仍然继续扫描，
+                  可以使用Switch,扫描到直接跳出 ，提高效率
+                */}
+                  <Route path="/home" component={Test} />
                 </Switch>
               </div>
             </div>

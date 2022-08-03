@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
+
 
 import Home from "./pages/Home/Home";
 import About from "./pages/About/About";
@@ -16,17 +17,18 @@ export default class App extends Component {
             <div className="list-group">
               <MyNavLink to="/about">About</MyNavLink>
               <MyNavLink to="/home">Home</MyNavLink>
+
+            {/* 模仿二级路由丢失样式：解决方案在index.html和index.js中，因为二级路由中会从一级路由下开始寻找文件 */}
+              {/* <MyNavLink to="/lalal/home">Home</MyNavLink> */}
             </div>
           </div>
           <div className="col-xs-6">
             <div className="panel">
               <div className="panel-body">
-                {/* 注册路由 */}
                 <Switch>
                   <Route path="/about" component={About} />
                   <Route path="/home" component={Home} />
-                  {/* 重定向，默认指向(如果都匹配不上) */}
-                  <Redirect to='/home'></Redirect>
+                  {/* <Route path="/lalal/home" component={Home} /> */}
                 </Switch>
               </div>
             </div>
